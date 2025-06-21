@@ -1,8 +1,5 @@
-const balance = {
-  current: 4836,
-  income: 3814.25,
-  expenses: 1700.5,
-};
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
 
 const transactions = [
   {
@@ -399,59 +396,23 @@ const transactions = [
   },
 ];
 
-const budgets = [
-  {
-    category: "Entertainment",
-    maximum: 50,
-    theme: "#277C78",
-  },
-  {
-    category: "Bills",
-    maximum: 750,
-    theme: "#82C9D7",
-  },
-  {
-    category: "Dining Out",
-    maximum: 75,
-    theme: "#F2CDAC",
-  },
-  {
-    category: "Personal Care",
-    maximum: 100,
-    theme: "#626070",
-  },
-];
-const pots = [
-  {
-    name: "Savings",
-    target: 2000,
-    total: 159,
-    theme: "#277C78",
-  },
-  {
-    name: "Concert Ticket",
-    target: 150,
-    total: 110,
-    theme: "#626070",
-  },
-  {
-    name: "Gift",
-    target: 150,
-    total: 110,
-    theme: "#82C9D7",
-  },
-  {
-    name: "New Laptop",
-    target: 1000,
-    total: 10,
-    theme: "#F2CDAC",
-  },
-  {
-    name: "Holiday",
-    target: 1440,
-    total: 531,
-    theme: "#826CB0",
-  },
-];
+async function main() {
+  console.log("🌱 Starting seeding...");
 
-export { budgets, balance, pots, transactions };
+  // Seed transactions
+  for (const transaction of transactions) {
+    await prisma.transactions.create({
+      data: transaction,
+    });
+  }
+  console.log(`✅ Seeded ${transactions.length} transactions.`);
+}
+
+main()
+  .catch((e) => {
+    console.error("❌ Seeding failed:", e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
