@@ -6,6 +6,7 @@
   --grey-900: #201f24;
   --grey-300: #b3b3b3;
   --beige-100: #f8f4f0;
+  --green: #277c78;
 }
 
 @theme inline {
@@ -14,6 +15,7 @@
   --color-grey-900: var(--grey-900);
   --color-grey-300: var(--grey-300);
   --color-beige-100: var(--beige-100);
+  --color-green: var(--green);
 }
 /*
 @media (prefers-color-scheme: dark) {
@@ -29,3 +31,7 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 } */
+
+body {
+  background: var(--beige-100);
+}
