@@ -1,6 +1,8 @@
 import prisma from "../../lib/prisma";
 import PotIcon from "../../../public/images/icon-pot.svg";
 import ColorTag from "../components/ColorTag";
+import ArrowRightIcon from "../../../public/images/icon-caret-right.svg";
+import Link from "next/link";
 import clsx from "clsx";
 
 export default async function Pots() {
@@ -12,14 +14,16 @@ export default async function Pots() {
 
 function PotsCard({ potsToShow }) {
   return (
-    <section className="bg-white mt-6">
-      <header>
-        <h2>Pots</h2>
-        <a href="/details">See details</a>
+    <section className="bg-white mt-6 rounded-lg p-6">
+      <header className="flex justify-between items-center mb-4">
+        <h2 className="text-grey-900 font-semibold text-xl">Pots</h2>
+        <Link href="/pots" className="text-grey-500 text-sm flex items-center">
+          See details <ArrowRightIcon className="ml-3" />{" "}
+        </Link>
       </header>
 
-      <div className="main-flex-grid">
-        <div className="total-saved bg-beige-100">
+      <div className="grid grid-cols-2">
+        <div className="rounded-xl bg-beige-100 p-4 flex items-center space-x-4 mb-6 md:mb-0">
           <div className="icon-container">
             <span role="img" aria-label="Money bag icon">
               {" "}
@@ -27,13 +31,13 @@ function PotsCard({ potsToShow }) {
             </span>
           </div>
 
-          <div className="saved-amount-details bg-beige-100 ">
-            <p className="label">Total Saved</p>
-            <p className="amount">$850</p>
+          <div className="">
+            <p className="text-grey-500 text-sm">Total Saved</p>
+            <p className="text-grey-900 text-bold text-3xl">$850</p>
           </div>
         </div>
 
-        <dl className="pot-definitions grid grid-cols-2 gap-3.5">
+        <dl className="grid grid-cols-2 gap-y-4 gap-x-2 md:grid-cols-2 md:gap-y-6 md:gap-x-4 flex-grow">
           {potsToShow.map((pot) => {
             let placementClasses = [];
 
